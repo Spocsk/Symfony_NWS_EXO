@@ -14,18 +14,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class SeatController extends AbstractController
 {
     /**
-     * @Route("/", name="seat")
+     * @Route("/new", name="seat")
      */
     public function new(Request $request): Response
     {
-        // creates a task object and initializes some data for this example
+        // just setup a fresh $task object (remove the example data)
         $seat = new Seat();
 
-        $form = $this->createFormBuilder($seat)
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Valider'])
-            ->getForm();
+        $form = $this->createForm(Seat::class, $seat);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $seat = $form->getData();
+
+            // fait des truc avec la bdd
+            // $entityManager->persist($seat);
+            // $entityManager->flush();
+
+        }
 
         return $this->render('index.html.twig', [
             'form' => $form->createView(),
