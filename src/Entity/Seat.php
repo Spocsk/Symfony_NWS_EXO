@@ -18,40 +18,57 @@ class Seat
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $first_name;
+    private $occupant;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private $last_name;
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getOccupant(): ?string
     {
-        return $this->first_name;
+        return $this->occupant;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setOccupant(string $occupant): self
     {
-        $this->first_name = $first_name;
+        $this->occupant = $occupant;
 
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->last_name;
+        return $this->createdAt;
     }
 
-    public function setLastName(string $last_name): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->last_name = $last_name;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
