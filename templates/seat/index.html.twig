@@ -1,20 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SeatController!{% endblock %}
+{% block title %}Seat Tracker{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {{ parent() }}
+    <div class="container"
+         style="width: 80%; margin: 0 auto; background-color: whitesmoke; display: flex; flex-wrap: wrap">
+        {% for seat in seat_data %}
+            {% if seat["occupant"] == null %}
+                <div style="display: flex; flex-direction: column;background-color: green; margin: 1em; padding: 2em">
+                    <a href="/seat/{{ seat["id"] }}/edit" style="color: white"> Place n°{{ seat["id"] }} </a>
+                    <p style="color: white">Place libre</p>
+                </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/spocsk/Documents/Programmation/Symfony/NWS/seat_tracker/src/Controller/SeatController.php'|file_link(0) }}">src/Controller/SeatController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/spocsk/Documents/Programmation/Symfony/NWS/seat_tracker/templates/seat/index.html.twig'|file_link(0) }}">templates/seat/index.html.twig</a></code></li>
-    </ul>
-</div>
+            {% else %}
+                <div style="display: flex; flex-direction: column;background-color: red; margin: 1em; padding: 2em">
+                    <a style="color: white">Place n°{{ seat["id"] }}</a>
+                    <p style="color: white">Place réservée par : <br> {{ seat["occupant"] }} <br> à {{ seat["updatedAt"] }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}

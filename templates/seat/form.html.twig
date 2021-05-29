@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Seat Tracker{% endblock %}
+
+
+{% block body %}
+    {{ parent() }}
+    <style>
+        label {
+            margin: 2em;
+        }
+        div .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin: 2em;
+        }
+        button {
+            margin: 2em;
+        }
+    </style>
+    <div class="container" style="width: 80%; margin: 0 auto; background-color: whitesmoke; display: flex; flex-wrap: wrap">
+        {{ form(formSeat) }}
+    </div>
+{% endblock %}
